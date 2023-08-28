@@ -9,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
     var services = builder.Services;
     var env = builder.Environment;
  
-    services.AddDbContext<DataContext>();
+    services.AddDbContext<ClienteDataContext>();
+    services.AddDbContext<ProductoDataContext>();
+    services.AddDbContext<FacturaDataContext>();
     services.AddCors();
     services.AddControllers().AddJsonOptions(x =>
     {
@@ -22,7 +24,9 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     // configure DI for application services
-    services.AddScoped<IUserService, UserService>();
+    services.AddScoped<IClienteService, ClienteService>();
+    services.AddScoped<IProductoService, ProductoService>();
+    services.AddScoped<IFacturaService, FacturaService>();
 }
 
 var app = builder.Build();
